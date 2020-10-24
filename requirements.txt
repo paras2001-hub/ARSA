@@ -44,7 +44,6 @@ jupyter-latex-envs==1.4.6
 jupyter-nbextensions-configurator==0.4.1
 jupyterlab-pygments==0.1.1
 jupyterthemes==0.20.0
-kivy-deps.glew==0.1.12
 kivy-deps.sdl2==0.1.23
 kiwisolver==1.2.0
 lesscpy==0.14.0
