@@ -6,6 +6,9 @@ from nltk.corpus import stopwords
 import nltk
 import string
 from nltk import pos_tag
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
 
 app = Flask(__name__)
 
