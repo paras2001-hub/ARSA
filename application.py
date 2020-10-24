@@ -6,7 +6,7 @@ from nltk.corpus import stopwords
 import nltk
 import string
 from nltk import pos_tag
-
+nltk.data.path.append('./nltk_data/')
 
 app = Flask(__name__)
 
