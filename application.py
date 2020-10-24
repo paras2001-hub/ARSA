@@ -5,10 +5,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 import nltk
 import string
-nltk.download('averaged_perceptron_tagger')
 from nltk import pos_tag
-nltk.download('stopwords')
-nltk.download('wordnet')
 
 app = Flask(__name__)
 
