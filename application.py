@@ -3,7 +3,6 @@ import pickle
 from flask_restful import reqparse
 from nltk.stem import WordNetLemmatizer
 import nltk
-nltk.download('wordnet')
 from nltk.corpus import wordnet
 import string
 from nltk import pos_tag
