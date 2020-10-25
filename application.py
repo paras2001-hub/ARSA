@@ -2,12 +2,11 @@ from flask import Flask,request,jsonify
 import pickle
 from flask_restful import reqparse
 from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords
-from nltk.corpus import wordnet
 import nltk
+nltk.download('wordnet')
+from nltk.corpus import wordnet
 import string
 from nltk import pos_tag
-nltk.download('wordnet')
 
 app = Flask(__name__)
 
