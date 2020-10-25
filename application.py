@@ -1,15 +1,17 @@
 from flask import Flask,request,jsonify
 import pickle
+import nltk
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
+nltk.download('wordnet')
 from flask_restful import reqparse
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk.corpus import wordnet
-import nltk
 import string
-nltk.download('averaged_perceptron_tagger')
 from nltk import pos_tag
-nltk.download('stopwords')
-nltk.download('wordnet')
+
+nltk.data.path('./nltk_data/')
 
 app = Flask(__name__)
 
