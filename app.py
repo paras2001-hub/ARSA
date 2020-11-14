@@ -13,6 +13,10 @@ app = Flask(__name__)
 def hello():
 	return 'Up and running'
 
+@app.route('/dummy',methods = ['GET'])
+def dummy():
+	return 'this is a connection test.'
+
 @app.route('/predict',methods = ['POST'])
 def predict():
 	output_words = []
