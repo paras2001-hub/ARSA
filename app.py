@@ -13,12 +13,9 @@ app = Flask(__name__)
 def hello():
 	return 'Up and running'
 
-
-@app.route('/predict1',methods = ['POST'])
-def predict1():
+def cleandata():
 	output_words = []
 	current_features = {}
-	#Importing Model & getting input
 	json = request.get_json()
 	print(json)
 	lst = list(json[0].values())
@@ -48,7 +45,7 @@ def predict1():
 			output_words.append(clean_words.lower())
 	
 	features = []
-	with open('samplewords.txt', 'r') as filehandle:
+	with open('sample words unigram.txt', 'r') as filehandle:
 		filecontents = filehandle.readlines()
 
     	for line in filecontents:
@@ -58,12 +55,15 @@ def predict1():
 	words_set=set(output_words)
 	for w in features:
 		current_features[w]=w in words_set
-	x = current_features
+	return current_features
 
+
+@app.route('/predict1',methods = ['POST'])
+def predict1():
 	with open('NBmodel','rb') as w:
 		imp_model1 = pickle.load(w)
 
-	prediction = imp_model1.classify(x)
+	prediction = imp_model1.classify(cleandata())
 	print("here:",prediction)
 
 	if(prediction=="pos"):
@@ -74,9 +74,36 @@ def predict1():
 
 @app.route('/predict2',methods = ['POST'])
 def predict2():
+	with open('RFCmodel','rb') as w:
+		imp_model2 = pickle.load(w)
+
+	prediction = imp_model2.classify(cleandata())
+	print("here:",prediction)
+
+	if(prediction=="pos"):
+		resp = 'Positive'
+	else:
+		resp = 'Negative'
+	return jsonify({'prediction': resp})
+
+@app.route('/predict3',methods = ['POST'])
+def predict3():
+	with open('SVM_CV_UNI_model','rb') as w:
+		imp_model3 = pickle.load(w)
+
+	prediction = imp_model3.classify(cleandata())
+	print("here:",prediction)
+
+	if(prediction=="pos"):
+		resp = 'Positive'
+	else:
+		resp = 'Negative'
+	return jsonify({'prediction': resp})
+
+@app.route('/predict4',methods = ['POST'])
+def predict4():
 	output_words = []
 	current_features = {}
-	#Importing Model & getting input
 	json = request.get_json()
 	print(json)
 	lst = list(json[0].values())
@@ -106,7 +133,7 @@ def predict2():
 			output_words.append(clean_words.lower())
 	
 	features = []
-	with open('samplewords.txt', 'r') as filehandle:
+	with open('sample words bigram.txt', 'r') as filehandle:
 		filecontents = filehandle.readlines()
 
     	for line in filecontents:
@@ -118,10 +145,10 @@ def predict2():
 		current_features[w]=w in words_set
 	x = current_features
 
-	with open('RCFmodel','rb') as w:
-		imp_model2 = pickle.load(w)
+	with open('SVM_CV_BI_model','rb') as w:
+		imp_model4 = pickle.load(w)
 
-	prediction = imp_model2.classify(x)
+	prediction = imp_model4.classify(x)
 	print("here:",prediction)
 
 	if(prediction=="pos"):
@@ -130,63 +157,7 @@ def predict2():
 		resp = 'Negative'
 	return jsonify({'prediction': resp})
 
-@app.route('/predict3',methods = ['POST'])
-def predict3():
-	output_words = []
-	current_features = {}
-	#Importing Model & getting input
-	json = request.get_json()
-	print(json)
-	lst = list(json[0].values())
-	print(lst)
-	review = lst[0]
-	print(lst[0])
 
-	lemmatizer= WordNetLemmatizer()
-
-	stop= ['i','me','my','myself','we','our','ours','ourselves','you',"you're","you've","you'll","you'd",'your','yours','yourself','yourselves','he','him','his','himself','she',"she's",'her','hers','herself','it',"it's",'its','itself','they','them','their','theirs','themselves','what','which','who','whom','this','that',"that'll",'these','those','am','is','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','a','an','the','and','but','if','or','because','as','until','while','of','at','by','for','with','about','against','between','into','through','during','before','after','above','below','to','from','up','down','in','out','on','off','over','under','again','further','then','once','here','there','when','where','why','how','all','any','both','each','few','more','most','other','some','such','no','nor','not','only','own','same','so','than','too','very','s','t','can','will','just','don',"don't",'should',"should've",'now','d','ll','m','o','re','ve','y','ai','aren',"aren't",'couldn',"couldn't",'didn',"didn't",'doesn',"doesn't",'hadn',"hadn't",'hasn',"hasn't",'haven',"haven't",'isn',"isn't",'ma','mightn',"mightn't",'mustn',"mustn't",'needn',"needn't",'shan',"shan't",'shouldn',"shouldn't",'wasn',"wasn't",'weren',"weren't",'won',"won't",'wouldn',"wouldn't",'!','"','#','$','%','&',"'",'(',')','*','+',',','-','.',',',':',';','<','=','>','?','@','[','\\',']','^','_','`','{','|','}','~']
-
-	words = review.split()
-	for w in words :
-		if w.lower() not in stop :
-			if w.lower().startswith("J"):
-				pos= wordnet.ADJ
-			elif w.lower().startswith("V"):
-				pos= wordnet.VERB
-			elif w.lower().startswith("N"):
-				pos= wordnet.NOUN
-			elif w.lower().startswith("R"):
-				pos= wordnet.ADV
-			else:
-				pos= wordnet.NOUN
-
-			clean_words=lemmatizer.lemmatize(w,pos)            #[0]will give tuple #[1] will be noun
-			output_words.append(clean_words.lower())
-	
-	features = []
-	with open('samplewords.txt', 'r') as filehandle:
-		filecontents = filehandle.readlines()
-
-    	for line in filecontents:
-        	current_place = line[:-1]
-        	features.append(current_place)
-
-	words_set = set(output_words)
-	for w in features:
-		current_features[w]=w in words_set
-	x = current_features
-	
-	with open('SVCmodel','rb') as w:
-		imp_model2 = pickle.load(w)
-
-	prediction = imp_model2.classify(x)
-	print("here:",prediction)
-
-	if(prediction=="pos"):
-		resp = 'Positive'
-	else:
-		resp = 'Negative'
-	return jsonify({'prediction': resp})
 
 if __name__=='__main__':
 	app.run(host='0.0.0.0',)
