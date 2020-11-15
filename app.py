@@ -13,7 +13,7 @@ app = Flask(__name__)
 def hello():
 	return 'Up and running'
 
-@app.route('/predict')
+@app.route('/predict',methods = ['POST'])
 def predict():
 	output_words = []
 	current_features = {}
