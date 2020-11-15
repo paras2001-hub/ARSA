@@ -60,7 +60,7 @@ def predict1():
 		current_features[w]=w in words_set
 	x = current_features
 
-	with open('MNBmodel','rb') as w:
+	with open('NBmodel','rb') as w:
 		imp_model1 = pickle.load(w)
 
 	prediction = imp_model1.classify(x)
@@ -171,12 +171,12 @@ def predict3():
         	current_place = line[:-1]
         	features.append(current_place)
 
-	words_set=set(output_words)
+	words_set = set(output_words)
 	for w in features:
 		current_features[w]=w in words_set
 	x = current_features
-
-	with open('RCFmodel','rb') as w:
+	
+	with open('SVCmodel','rb') as w:
 		imp_model2 = pickle.load(w)
 
 	prediction = imp_model2.classify(x)
