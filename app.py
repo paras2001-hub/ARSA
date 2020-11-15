@@ -45,7 +45,7 @@ def predict():
 			clean_words=lemmatizer.lemmatize(w,pos)            #[0]will give tuple #[1] will be noun
 			output_words.append(clean_words.lower())
 	features = []
-	if opt == 1:
+	if opt == 0:
 		with open('sample words unigram.txt', 'r') as filehandle:
 			filecontents = filehandle.readlines()
 		for line in filecontents:
@@ -58,7 +58,7 @@ def predict():
 		with open('NBmodel','rb') as w:
 			imp_model1 = pickle.load(w)
 		prediction = imp_model1.classify(x)
-	#elif opt == 2:
+	#elif opt == 1:
 		#with open('sample words unigram.txt', 'r') as filehandle:
 			#filecontents = filehandle.readlines()
 		#for line in filecontents:
@@ -72,7 +72,7 @@ def predict():
 			#imp_model2 = pickle.load(w)
 		#prediction = imp_model2.classify(x)
 
-	elif opt ==3:
+	elif opt == 2:
 		with open('sample words unigram.txt', 'r') as filehandle:
 			filecontents = filehandle.readlines()
 		for line in filecontents:
@@ -86,7 +86,7 @@ def predict():
 			imp_model3 = pickle.load(w)
 		prediction = imp_model3.predict(x)
 
-	elif opt == 4:
+	elif opt == 3:
 		with open('sample words bigram.txt', 'r') as filehandle:
 			filecontents = filehandle.readlines()
 		for line in filecontents:
