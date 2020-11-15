@@ -175,7 +175,7 @@ def predict3():
 	with open('SVM_CV_UNI_model','rb') as w:
 		imp_model3 = pickle.load(w)
 
-	prediction = imp_model3.classify(x)
+	prediction = imp_model3.predict(x)
 	print("here:",prediction)
 
 	if(prediction=="pos"):
@@ -232,7 +232,7 @@ def predict4():
 	with open('SVM_CV_BI_model','rb') as w:
 		imp_model4 = pickle.load(w)
 
-	prediction = imp_model4.classify(x)
+	prediction = imp_model4.predict(x)
 	print("here:",prediction)
 
 	if(prediction=="pos"):
