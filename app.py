@@ -51,54 +51,50 @@ def predict():
 		for line in filecontents:
 			current_place = line[:-1]
 			features.append(current_place)
-		words_set=set(output_words)
+		words_set = set(output_words)
 		for w in features:
 			current_features[w]=w in words_set
 		x = current_features
 		with open('NBmodel','rb') as w:
 			imp_model1 = pickle.load(w)
 		prediction = imp_model1.classify(x)
-	#elif opt == 1:
-		#with open('sample words unigram.txt', 'r') as filehandle:
-			#filecontents = filehandle.readlines()
-		#for line in filecontents:
-			#current_place = line[:-1]
-			#features.append(current_place)
-		#words_set=set(output_words)
-		#for w in features:
-			#current_features[w]=w in words_set
-		#x = current_features
-		#with open('RFCmodel','rb') as w:
-			#imp_model2 = pickle.load(w)
-		#prediction = imp_model2.classify(x)
+	
+	elif opt == 1:
+		with open('count_vec_uni_model','rb') as w:
+			cv_uni = pickle.load(w)
+		x_paragraph=[" ".join(output_words)]
+		x=cv_uni.transform(x_paragraph)
+		with open('DT_CV_UNI_model','rb') as w:
+			imp_model2 = pickle.load(w)
+		prediction = imp_model2.predict(x)
 
 	elif opt == 2:
-		with open('sample words unigram.txt', 'r') as filehandle:
-			filecontents = filehandle.readlines()
-		for line in filecontents:
-			current_place = line[:-1]
-			features.append(current_place)
-		words_set=set(output_words)
-		for w in features:
-			current_features[w]=w in words_set
-		x = current_features
-		with open('SVM_CV_UNI_model','rb') as w:
+		with open('count_vec_bi_model','rb') as w:
+			cv_uni = pickle.load(w)
+		x_paragraph=[" ".join(output_words)]
+		x=cv_uni.transform(x_paragraph)
+		with open('DT_CV_BI_model','rb') as w:
 			imp_model3 = pickle.load(w)
 		prediction = imp_model3.predict(x)
 
 	elif opt == 3:
-		with open('sample words bigram.txt', 'r') as filehandle:
-			filecontents = filehandle.readlines()
-		for line in filecontents:
-			current_place = line[:-1]
-			features.append(current_place)
-		words_set=set(output_words)
-		for w in features:
-			current_features[w]=w in words_set
-		x = current_features
-		with open('SVM_CV_BI_model','rb') as w:
+		with open('count_vec_uni_model','rb') as w:
+			cv_uni = pickle.load(w)
+		x_paragraph=[" ".join(output_words)]
+		x=cv_uni.transform(x_paragraph)
+		with open('SVM_CV_UNI_model','rb') as w:
 			imp_model4 = pickle.load(w)
 		prediction = imp_model4.predict(x)
+
+	elif opt == 4:
+		with open('count_vec_bi_model','rb') as w:
+			cv_bi = pickle.load(w)
+		x_paragraph=[" ".join(output_words)]
+		x=cv_bi.transform(x_paragraph)
+		with open('SVM_CV_BI_model','rb') as w:
+			imp_model5 = pickle.load(w)
+		prediction = imp_model5.predict(x)
+	
 	print("here:",prediction)
 	if(prediction=="pos"):
 		resp = 'Positive'
@@ -107,4 +103,5 @@ def predict():
 	return jsonify({'prediction': resp})
 
 if __name__=='__main__':
-	app.run(host='0.0.0.0',)
+	app.run(host='192.168.0.192', port='5000', debug=True)
+	#app.run(host='0.0.0.0',)
