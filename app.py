@@ -70,9 +70,9 @@ def predict():
 
 	elif opt == 2:
 		with open('count_vec_bi_model','rb') as w:
-			cv_uni = pickle.load(w)
+			cv_bi = pickle.load(w)
 		x_paragraph=[" ".join(output_words)]
-		x=cv_uni.transform(x_paragraph)
+		x=cv_bi.transform(x_paragraph)
 		with open('DT_CV_BI_model','rb') as w:
 			imp_model3 = pickle.load(w)
 		prediction = imp_model3.predict(x)
@@ -94,6 +94,24 @@ def predict():
 		with open('SVM_CV_BI_model','rb') as w:
 			imp_model5 = pickle.load(w)
 		prediction = imp_model5.predict(x)
+
+	elif opt == 5:
+		with open('CV_MNB_UNI','rb') as w:
+			cv_uni = pickle.load(w)
+		x_paragraph=[" ".join(output_words)]
+		x=cv_uni.transform(x_paragraph)
+		with open('MNB_CV_UNI_model','rb') as w:
+			imp_model6 = pickle.load(w)
+		prediction = imp_model6.predict(x)
+
+	elif opt == 6:
+		with open('CV_MNB_BI','rb') as w:
+			cv_bi = pickle.load(w)
+		x_paragraph=[" ".join(output_words)]
+		x=cv_bi.transform(x_paragraph)
+		with open('MNB_CV_BI_model','rb') as w:
+			imp_model7 = pickle.load(w)
+		prediction = imp_model7.predict(x)
 	
 	print("here:",prediction)
 	if(prediction=="pos"):
