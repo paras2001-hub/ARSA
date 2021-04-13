@@ -38,9 +38,9 @@ def predict():
 	json = request.get_json()
 	print(json)
 	lst = list(json[0].values())
-	with open('tokenizer.json') as json_file:
-		json_string = json.load(json_file)
-	tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(json_string)
+	#with open('tokenizer.json') as json_file:
+	#	json_string = json.load(json_file)
+	#tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(json_string)
 	review = lst[0]
 	opt = lst[1]
 
