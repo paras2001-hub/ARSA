@@ -6,6 +6,24 @@ import nltk
 from nltk.corpus import wordnet
 import string
 from nltk import pos_tag
+import os
+import re
+import shutil
+import string
+import tensorflow as tf
+from tensorflow.keras import regularizers
+from tensorflow.keras import layers
+from tensorflow.keras import losses
+from collections import Counter
+import pandas as pd
+import numpy as np
+import sklearn
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+from tensorflow.keras import preprocessing
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 app = Flask(__name__)
 
@@ -20,7 +38,9 @@ def predict():
 	json = request.get_json()
 	print(json)
 	lst = list(json[0].values())
-
+	with open('tokenizer.json') as json_file:
+		json_string = json.load(json_file)
+	tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(json_string)
 	review = lst[0]
 	opt = lst[1]
 
@@ -112,6 +132,21 @@ def predict():
 		with open('MNB_CV_BI_model','rb') as w:
 			imp_model7 = pickle.load(w)
 		prediction = imp_model7.predict(x)
+	
+	elif opt == 7:
+		new_model = tf.keras.models.load_model('tf_lstmmodel.h5')
+		rev_wordlist = []
+		review_token = ((tokenizer.texts_to_sequences(clean_words)))
+		for i in review_token:
+			for j in i:
+				rev_wordlist.append(j)
+		sequence_length=50
+		pad_review = pad_sequences([rev_wordlist], padding='post', maxlen=sequence_length)
+		res = new_model.predict(pad_review)
+		if res[0][0] > 0.5:
+			prediction = "pos"
+		else:
+			prediction = "neg" 
 	
 	print("here:",prediction)
 	if(prediction=="pos"):
