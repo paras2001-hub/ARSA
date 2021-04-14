@@ -64,7 +64,7 @@ termcolor==1.1.0
 terminado==0.9.1
 testpath==0.4.4
 tf-estimator-nightly==2.5.0.dev2021032601
-tf-cpu-nightly==2.6.0.dev20210407
+tf-nightly-cpu==2.6.0.dev20210407
 threadpoolctl==2.1.0
 tqdm==4.60.0
 webencodings==0.5.1
