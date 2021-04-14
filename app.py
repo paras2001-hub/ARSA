@@ -12,7 +12,6 @@ import re
 import shutil
 import tensorflow as tf
 from collections import Counter
-import pandas as pd
 import numpy as np
 import sklearn
 from tensorflow.keras import regularizers
