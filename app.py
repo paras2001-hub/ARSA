@@ -56,7 +56,7 @@ def predict():
 			else:
 				pos= wordnet.NOUN
 
-			clean_words=lemmatizer.lemmatize(w,pos)            #[0]will give tuple #[1] will be noun
+			clean_words=lemmatizer.lemmatize(w,pos)           
 			output_words.append(clean_words.lower())
 	features = []
 	if opt == 0:
