@@ -10,7 +10,7 @@ from nltk import pos_tag
 import os
 import re
 import shutil
-import tensorflow as tf
+import tensorflow-cpu as tf
 from collections import Counter
 import pandas as pd
 import numpy as np
