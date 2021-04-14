@@ -23,10 +23,8 @@ google-pasta==0.2.0
 graphviz==0.16
 grpcio==1.34.1
 h5py==2.10.0
-itsdangerous==1.1.0
-Jinja2==2.11.2
 joblib==1.0.1
-keras-nightly==2.6.0.dev2021041200
+keras==2.4.3
 Keras-Preprocessing==1.1.2
 nltk==3.6.1
 numpy==1.19.5
@@ -53,8 +51,8 @@ sklearn==0.0
 termcolor==1.1.0
 terminado==0.9.1
 testpath==0.4.4
-tf-estimator-nightly==2.5.0.dev2021032601
-tf-nightly-cpu==2.6.0.dev20210407
+tensorflow-estimator==2.1.0
+tensorflow-cpu==2.1.0
 threadpoolctl==2.1.0
 tqdm==4.60.0
 webencodings==0.5.1
