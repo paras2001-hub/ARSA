@@ -143,7 +143,7 @@ def predict():
 		sequence_length=50
 		pad_review = pad_sequences([rev_wordlist], padding='post', maxlen=sequence_length)
 		res = new_model.predict(pad_review)
-		if res[0][0] > 0.805:
+		if res[0][0] >= 0.805:
 			prediction = "pos"
 		else:
 			prediction = "neg" 
