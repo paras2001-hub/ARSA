@@ -30,9 +30,6 @@ joblib==1.0.1
 Keras==2.4.3
 keras-nightly==2.6.0.dev2021041200
 Keras-Preprocessing==1.1.2
-mkl-fft==1.2.0
-mkl-random==1.2.0
-mkl-service==2.3.0
 nltk==3.6.1
 numpy==1.19.5
 oauthlib==3.1.0
@@ -60,15 +57,14 @@ scipy==1.4.1
 seaborn==0.11.1
 Send2Trash==1.5.0
 sklearn==0.0
-tb-nightly==2.5.0a20210412
-tensorflow==2.1.0
+tensorflow-cpu==2.1.0
 tensorflow-estimator==2.1.0
 tensorflow-hub==0.11.0
 termcolor==1.1.0
 terminado==0.9.1
 testpath==0.4.4
 tf-estimator-nightly==2.5.0.dev2021032601
-tf-nightly==2.6.0.dev20210407
+tf-cpu-nightly==2.6.0.dev20210407
 threadpoolctl==2.1.0
 tqdm==4.60.0
 webencodings==0.5.1
