@@ -1,3 +1,4 @@
+import json
 from flask import Flask,request,jsonify
 import pickle
 from flask_restful import reqparse
@@ -6,6 +7,7 @@ import nltk
 from nltk.corpus import wordnet
 import string
 from nltk import pos_tag
+nltk.download('wordnet')
 import os
 import re
 import shutil
@@ -35,10 +37,11 @@ def hello():
 def predict():
 	output_words = []
 	current_features = {}
-	json = request.get_json()
-	print(json)
-	lst = list(json[0].values())
+	json_ = request.get_json()
+	print(json_)
+	lst = list(json_[0].values())
 	with open('tokenizer.json') as json_file:
+		print(json_file)
 		json_string = json.load(json_file)
 	tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(json_string)
 	review = lst[0]
@@ -136,7 +139,7 @@ def predict():
 	elif opt == 7:
 		new_model = tf.keras.models.load_model('tf_lstmmodel.h5')
 		rev_wordlist = []
-		review_token = ((tokenizer.texts_to_sequences(clean_words)))
+		review_token = ((tokenizer.texts_to_sequences(output_words)))
 		for i in review_token:
 			for j in i:
 				rev_wordlist.append(j)
@@ -156,5 +159,5 @@ def predict():
 	return jsonify({'prediction': resp})
 
 if __name__=='__main__':
-	#app.run(host='192.168.0.192', port='5000', debug=True)
-	app.run(host='0.0.0.0',)
+	app.run(host='192.168.0.179', port='5000', debug=True)
+	#app.run(host='0.0.0.0',)
