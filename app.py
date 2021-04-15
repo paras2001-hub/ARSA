@@ -14,6 +14,7 @@ import tensorflow as tf
 from collections import Counter
 import numpy as np
 import sklearn
+import tensorflow_hub as hub
 from tensorflow.keras import regularizers
 from tensorflow.keras import layers
 from tensorflow.keras import losses
