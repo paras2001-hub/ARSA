@@ -159,17 +159,8 @@ def predict():
 		else:
 			prediction = "neg" 
 	elif opt == 8:
-		embedding = "Embed"
-		hub_layer = hub.KerasLayer(embedding, input_shape=[], dtype=tf.string, trainable=True)
-		model2 = tf.keras.Sequential()
-		model2.add(hub_layer)
-		model2.add(tf.keras.layers.Dropout(0.3))
-		model2.add(tf.keras.layers.Dense(10, activation='relu',kernel_regularizer=regularizers.l2(0.0)))
-		model2.add(tf.keras.layers.Dropout(0.5))
-		model2.add(tf.keras.layers.Dense(10, activation='relu',kernel_regularizer=regularizers.l2(0.0)))
-		model2.add(tf.keras.layers.Dense(2,activation='softmax',kernel_regularizer=regularizers.l2(0.0)))
-		model2.load_weights('NN.h5')
-		res = model2.predict(output_words)
+		model_NN = tf.keras.models.load_model("Neural_Network")
+		res = model_NN.predict(output_words)
 		
 		if res[0][0] > res[0][1]:
 			prediction = "pos"
