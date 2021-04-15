@@ -144,7 +144,7 @@ def predict():
 		new_model.add(tf.keras.layers.Dropout(0.4))
 		new_model.add(tf.keras.layers.Dense(1,activation='sigmoid'))
 
-		new_model = tf.keras.models.load_weights('tf_lstmmodel_weights.h5')
+		new_model.load_weights('tf_lstmmodel_weights.h5')
 		rev_wordlist = []
 		review_token = ((tokenizer.texts_to_sequences(output_words)))
 		for i in review_token:
