@@ -38,8 +38,6 @@ def predict():
 		print(json_file)
 		json_string = json.load(json_file)
 	tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(json_string)
-	embedding = "https://tfhub.dev/google/tf2-preview/nnlm-en-dim50/1"
-	hub_layer = hub.KerasLayer(embedding, input_shape=[], dtype=tf.string, trainable=True)
 	review = lst[0]
 	opt = lst[1]
 
@@ -161,6 +159,8 @@ def predict():
 		else:
 			prediction = "neg" 
 	elif opt == 8:
+		embedding = "https://tfhub.dev/google/tf2-preview/nnlm-en-dim50/1"
+		hub_layer = hub.KerasLayer(embedding, input_shape=[], dtype=tf.string, trainable=True)
 		model2 = tf.keras.Sequential()
 		model2.add(hub_layer)
 		model2.add(tf.keras.layers.Dropout(0.3))
