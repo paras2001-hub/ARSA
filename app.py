@@ -159,7 +159,7 @@ def predict():
 		else:
 			prediction = "neg" 
 	elif opt == 8:
-		embedding = "https://tfhub.dev/google/tf2-preview/nnlm-en-dim50/1"
+		embedding = "Embed"
 		hub_layer = hub.KerasLayer(embedding, input_shape=[], dtype=tf.string, trainable=True)
 		model2 = tf.keras.Sequential()
 		model2.add(hub_layer)
