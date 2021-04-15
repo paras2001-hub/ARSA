@@ -130,7 +130,21 @@ def predict():
 		prediction = imp_model7.predict(x)
 	
 	elif opt == 7:
-		new_model = tf.keras.models.load_model('tf_lstmmodel.h5')
+		max_features =50000
+		embedding_dim =16
+		sequence_length = 50
+		new_model = tf.keras.Sequential()
+		new_model.add(tf.keras.layers.Embedding(max_features +1, embedding_dim, input_length=sequence_length, embeddings_regularizer = regularizers.l2(0.005))) 
+		new_model.add(tf.keras.layers.Dropout(0.4))
+		new_model.add(tf.keras.layers.LSTM(embedding_dim,dropout=0.2, recurrent_dropout=0.2,return_sequences=True,kernel_regularizer=regularizers.l2(0.005), bias_regularizer=regularizers.l2(0.005)))
+		new_model.add(tf.keras.layers.Flatten())
+		new_model.add(tf.keras.layers.Dense(512, activation='relu', kernel_regularizer=regularizers.l2(0.001),bias_regularizer=regularizers.l2(0.001),))
+		new_model.add(tf.keras.layers.Dropout(0.4))
+		new_model.add(tf.keras.layers.Dense(8, activation='relu',kernel_regularizer=regularizers.l2(0.001),bias_regularizer=regularizers.l2(0.001),))
+		new_model.add(tf.keras.layers.Dropout(0.4))
+		new_model.add(tf.keras.layers.Dense(1,activation='sigmoid'))
+
+		new_model = tf.keras.models.load_weights('tf_lstmmodel_weights.h5')
 		rev_wordlist = []
 		review_token = ((tokenizer.texts_to_sequences(output_words)))
 		for i in review_token:
