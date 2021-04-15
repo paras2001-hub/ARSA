@@ -37,6 +37,8 @@ def predict():
 		print(json_file)
 		json_string = json.load(json_file)
 	tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(json_string)
+	embedding = "https://tfhub.dev/google/tf2-preview/nnlm-en-dim50/1"
+	hub_layer = hub.KerasLayer(embedding, input_shape=[], dtype=tf.string, trainable=True)
 	review = lst[0]
 	opt = lst[1]
 
@@ -157,7 +159,21 @@ def predict():
 			prediction = "pos"
 		else:
 			prediction = "neg" 
-
+	elif opt == 8:
+		model2 = tf.keras.Sequential()
+		model2.add(hub_layer)
+		model2.add(tf.keras.layers.Dropout(0.3))
+		model2.add(tf.keras.layers.Dense(10, activation='relu',kernel_regularizer=regularizers.l2(0.0)))
+		model2.add(tf.keras.layers.Dropout(0.5))
+		model2.add(tf.keras.layers.Dense(10, activation='relu',kernel_regularizer=regularizers.l2(0.0)))
+		model2.add(tf.keras.layers.Dense(2,activation='softmax',kernel_regularizer=regularizers.l2(0.0)))
+		model2.load_weights('NN.h5')
+		res = model2.predict(output_words)
+		
+		if res[0][0] > res[0][1]:
+			prediction = "pos"
+		else:
+			prediction = "neg"
 			
 	print("here:",prediction)
 	if(prediction=="pos"):
