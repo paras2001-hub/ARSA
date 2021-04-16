@@ -160,7 +160,7 @@ def predict():
 		else:
 			prediction = "neg" 
 	elif opt == 8:
-		model_NN = tf.keras.models.load_model('Neural_Network', custom_objects={"keras_layer": KerasLayer})
+		model_NN = tf.keras.models.load_model('Neural_Network', custom_objects={"KerasLayer": KerasLayer})
 		res = model_NN.predict(output_words)
 		
 		if res[0][0] > res[0][1]:
