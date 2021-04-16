@@ -15,6 +15,7 @@ from collections import Counter
 import numpy as np
 import sklearn
 import tensorflow_hub as hub
+from tensorflow_hub import KerasLayer
 from tensorflow.keras import regularizers
 from tensorflow.keras import layers
 from tensorflow.keras import losses
@@ -159,7 +160,7 @@ def predict():
 		else:
 			prediction = "neg" 
 	elif opt == 8:
-		model_NN = tf.keras.models.load_model('Neural_Network', custom_objects={"KerasLayer": hub.Keraslayer})
+		model_NN = tf.keras.models.load_model('Neural_Network', custom_objects={"KerasLayer": Keraslayer})
 		res = model_NN.predict(output_words)
 		
 		if res[0][0] > res[0][1]:
