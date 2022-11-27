@@ -34,7 +34,7 @@ def predict():
 	current_features = {}
 	json_ = request.get_json()
 	print(json_)
-	lst = list(json_[0].values())
+	lst = list(json_.values())
 	with open('tokenizer.json') as json_file:
 		print(json_file)
 		json_string = json.load(json_file)
