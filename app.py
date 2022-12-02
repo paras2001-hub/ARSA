@@ -32,7 +32,7 @@ def hello():
 def predict():
 	output_words = []
 	current_features = {}
-	json_ = request.json()
+	json_ = request.json
 	print(json_)
 	lst = list(json_.values())
 	with open('tokenizer.json') as json_file:
