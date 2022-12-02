@@ -1,5 +1,5 @@
 import json
-from flask import Flask,request,jsonify
+from flask import Flask, request, jsonify
 import pickle
 from flask_restful import reqparse
 from nltk.stem import WordNetLemmatizer
@@ -32,7 +32,7 @@ def hello():
 def predict():
 	output_words = []
 	current_features = {}
-	json_ = request.json
+	json_ = request.get_json()
 	print(json_)
 	lst = list(json_.values())
 	with open('tokenizer.json') as json_file:
