@@ -33,7 +33,7 @@ def predict():
 	output_words = []
 	current_features = {}
 	json_val = request.get_json()
-	print(json_val)
+	print(os.getcwd())
 	lst = list(json_val.values())
 	with open('tokenizer.json') as json_file:
 		print(json_file)
