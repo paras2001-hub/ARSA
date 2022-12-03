@@ -24,6 +24,7 @@ graphviz==0.16
 grpcio==1.34.1
 gunicorn==20.1.0
 h5py==2.10.0
+jinja2==3.0.3
 joblib==1.0.1
 keras==2.4.3
 nltk==3.6.1
@@ -57,7 +58,7 @@ tensorflow-cpu==2.1.0
 threadpoolctl==2.1.0
 tqdm==4.60.0
 webencodings==0.5.1
-Werkzeug==0.16.1
+werkzeug==2.0.2
 win-inet-pton==1.1.0
 wincertstore==0.2
 wrapt==1.12.1
