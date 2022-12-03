@@ -24,6 +24,7 @@ graphviz==0.16
 grpcio==1.34.1
 gunicorn==20.1.0
 h5py==2.10.0
+itsdangerous==2.0.1
 jinja2==3.0.3
 joblib==1.0.1
 keras==2.4.3
