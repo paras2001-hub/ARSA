@@ -173,7 +173,7 @@ def predict():
 		resp = 'Positive'
 	else:
 		resp = 'Negative'
-	return jsonify({'prediction': resp})
+	return jsonify({'sentence': review, 'prediction': resp})
 
 if __name__=='__main__':
 	app.run(host='192.168.0.179', port='5000', debug=True)
